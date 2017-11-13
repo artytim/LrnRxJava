@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LrnRxJava.iml" filepath="$PROJECT_DIR$/.idea/modules/LrnRxJava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LrnRxJava_main.iml" filepath="$PROJECT_DIR$/.idea/modules/LrnRxJava_main.iml" group="LrnRxJava" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LrnRxJava_test.iml" filepath="$PROJECT_DIR$/.idea/modules/LrnRxJava_test.iml" group="LrnRxJava" />
+    </modules>
+  </component>
+</project>
