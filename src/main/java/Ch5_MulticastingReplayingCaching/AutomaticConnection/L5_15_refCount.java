@@ -1,15 +1,23 @@
-package Ch5_MulticastingReplayingCaching;
+package Ch5_MulticastingReplayingCaching.AutomaticConnection;
 
 import io.reactivex.Observable;
 
 import java.util.concurrent.TimeUnit;
 
-public class Ch5_15 {
+public class L5_15_refCount {
+    /*
+    refCount() on ConnectableObservable is similar to autoConnect(1), which fires after
+     getting one subscription. But when it has no Observers anymore, it will dispose of
+     itself and start over when a new one comes in
+     */
     public static void main(String[] args) {
         Observable<Long> seconds =
                 Observable.interval(1, TimeUnit.SECONDS)
                         .publish()
                         .refCount();
+//        You can use an alias for publish().refCount() using the share() operator.
+//                Observable<Long> seconds =
+//                Observable.interval(1, TimeUnit.SECONDS).share();
 //Observer 1
         seconds.take(5)
                 .subscribe(l -> System.out.println("Observer 1: " +
