@@ -1,9 +1,9 @@
-package Ch5_MulticastingReplayingCaching;
+package Ch5_MulticastingReplayingCaching.Subjects;
 
 import io.reactivex.subjects.AsyncSubject;
 import io.reactivex.subjects.Subject;
 
-public class Ch5_25 {
+public class L5_25_Subjects_6 {
     public static void main(String[] args) {
         Subject<String> subject =
                 AsyncSubject.create();

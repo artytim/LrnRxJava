@@ -1,4 +1,4 @@
-package Ch5_MulticastingReplayingCaching;
+package Ch5_MulticastingReplayingCaching.Subjects;
 
 import io.reactivex.Observable;
 import io.reactivex.subjects.Subject;
@@ -6,7 +6,7 @@ import io.reactivex.subjects.UnicastSubject;
 
 import java.util.concurrent.TimeUnit;
 
-public class Ch5_27 {
+public class L5_27_Subjects_8 {
     public static void main(String[] args) {
         Subject<String> subject =
                 UnicastSubject.create();

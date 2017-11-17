@@ -1,23 +1,24 @@
-package Ch5_MulticastingReplayingCaching;
+package Ch5_MulticastingReplayingCaching.Replaying_Caching;
 
 import io.reactivex.Observable;
 
 import java.util.concurrent.TimeUnit;
 
-public class Ch5_16 {
+public class L5_18_Replaying_Caching_replay_3 {
     public static void main(String[] args) {
         Observable<Long> seconds =
-                Observable.interval(1, TimeUnit.SECONDS)
-                        .replay()
-                        .autoConnect();
+                Observable.interval(300, TimeUnit.MILLISECONDS)
+                        .map(l -> (l + 1) * 300) // map to elapsed milliseconds
+                .replay(1, TimeUnit.SECONDS)
+                .autoConnect();
 //Observer 1
         seconds.subscribe(l -> System.out.println("Observer 1: " +
                 l));
-        sleep(3000);
+        sleep(2000);
 //Observer 2
         seconds.subscribe(l -> System.out.println("Observer 2: " +
                 l));
-        sleep(3000);
+        sleep(1000);
     }
 
     public static void sleep(long millis) {

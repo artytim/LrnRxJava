@@ -1,4 +1,4 @@
-package Ch5_MulticastingReplayingCaching;
+package Ch5_MulticastingReplayingCaching.Subjects;
 
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
@@ -6,7 +6,7 @@ import io.reactivex.subjects.Subject;
 
 import java.util.concurrent.TimeUnit;
 
-public class Ch5_21 {
+public class L5_21_Subjects_2 {
     public static void main(String[] args) {
         Observable<String> source1 =
                 Observable.interval(1, TimeUnit.SECONDS)
