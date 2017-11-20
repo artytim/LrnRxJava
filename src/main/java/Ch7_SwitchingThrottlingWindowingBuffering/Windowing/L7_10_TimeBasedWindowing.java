@@ -1,16 +1,17 @@
-package Ch7_SwitchingThrottlingWindowingBuffering;
+package Ch7_SwitchingThrottlingWindowingBuffering.Windowing;
 
 import io.reactivex.Observable;
 
 import java.util.concurrent.TimeUnit;
 
-public class Ch7_7 {
+public class L7_10_TimeBasedWindowing {
     public static void main(String[] args) {
-        Observable<Long> cutOffs =
-                Observable.interval(1, TimeUnit.SECONDS);
         Observable.interval(300, TimeUnit.MILLISECONDS)
                 .map(i -> (i + 1) * 300) // map to elapsed time
-                .buffer(cutOffs)
+                .window(1, TimeUnit.SECONDS)
+                .flatMapSingle(obs -> obs.reduce("", (total,
+                                                      next) -> total
+                        + (total.equals("") ? "" : "|") + next))
                 .subscribe(System.out::println);
         sleep(5000);
     }

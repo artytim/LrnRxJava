@@ -1,8 +1,12 @@
-package Ch7_SwitchingThrottlingWindowingBuffering;
+package Ch7_SwitchingThrottlingWindowingBuffering.Windowing;
+
+/*
+ The window() operators buffer into other Observables rather than collections
+ */
 
 import io.reactivex.Observable;
 
-public class Ch7_8 {
+public class L7_8_FixedSizeWindowing {
     public static void main(String[] args) {
         Observable.range(1, 50)
                 .window(8)

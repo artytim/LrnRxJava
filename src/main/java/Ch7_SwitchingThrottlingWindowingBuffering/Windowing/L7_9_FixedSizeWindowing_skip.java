@@ -1,8 +1,8 @@
-package Ch7_SwitchingThrottlingWindowingBuffering;
+package Ch7_SwitchingThrottlingWindowingBuffering.Windowing;
 
 import io.reactivex.Observable;
 
-public class Ch7_9 {
+public class L7_9_FixedSizeWindowing_skip {
     public static void main(String[] args) {
         Observable.range(1, 50)
                 .window(2, 3)
