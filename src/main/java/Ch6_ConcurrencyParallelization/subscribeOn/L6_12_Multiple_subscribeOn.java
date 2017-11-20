@@ -1,9 +1,14 @@
-package Ch6_ConcurrencyParallelization;
+package Ch6_ConcurrencyParallelization.subscribeOn;
 
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 
-public class Ch6_12 {
+public class L6_12_Multiple_subscribeOn {
+    /*
+     if you have multiple subscribeOn() calls on a given Observable chain, the top-most one,
+      or the one closest to the source, will win and cause any subsequent ones to have NO
+      practical effect.
+     */
     public static void main(String[] args) {
         Observable.just("Alpha", "Beta", "Gamma", "Delta",
                 "Epsilon")

@@ -1,16 +1,20 @@
-package Ch6_ConcurrencyParallelization;
+package Ch6_ConcurrencyParallelization.Parallelization;
 
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 
 import java.time.LocalTime;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class Ch6_17 {
+public class L6_18_Parallelization_groupBy {
     public static void main(String[] args) {
+        int coreCount = Runtime.getRuntime().availableProcessors();
+        AtomicInteger assigner = new AtomicInteger(0);
         Observable.range(1, 10)
-                .flatMap(i -> Observable.just(i)
-                        .subscribeOn(Schedulers.computation())
+                .groupBy(i -> assigner.incrementAndGet() %
+                        coreCount)
+                .flatMap(grp -> grp.observeOn(Schedulers.io())
                         .map(i2 -> intenseCalculation(i2))
                 )
                 .subscribe(i -> System.out.println("Received " + i +

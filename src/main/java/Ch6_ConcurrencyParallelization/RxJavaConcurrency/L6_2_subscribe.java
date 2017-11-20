@@ -1,25 +1,26 @@
-package Ch6_ConcurrencyParallelization;
+package Ch6_ConcurrencyParallelization.RxJavaConcurrency;
 
 import io.reactivex.Observable;
-import io.reactivex.schedulers.Schedulers;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Ch6_3 {
+public class L6_2_subscribe {
+    /*
+    The first Observable firing Alpha, Beta, Gamma must finish first and call onComplete()
+    before firing the second Observable emitting the numbers 1 through 6
+     */
     public static void main(String[] args) {
         Observable.just("Alpha", "Beta", "Gamma", "Delta",
                 "Epsilon")
-                .subscribeOn(Schedulers.computation())
                 .map(s -> intenseCalculation((s)))
                 .subscribe(System.out::println);
         Observable.range(1, 6)
-                .subscribeOn(Schedulers.computation())
                 .map(s -> intenseCalculation((s)))
                 .subscribe(System.out::println);
-        sleep(20000);
     }
 
     public static <T> T intenseCalculation(T value) {
+        // Emulate a long-running process
         sleep(ThreadLocalRandom.current().nextInt(3000));
         return value;
     }

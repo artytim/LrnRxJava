@@ -1,17 +1,21 @@
-package Ch6_ConcurrencyParallelization;
+package Ch6_ConcurrencyParallelization.subscribeOn;
 
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Ch6_9 {
+public class L6_9_Multiple_Observers_One_Thread {
+    /*
+     If you want only one thread to serve both Observers, multicast the operation.
+     Make sure subscribeOn() is before the multicast operators
+     */
     public static void main(String[] args) {
         Observable<Integer> lengths =
                 Observable.just("Alpha", "Beta", "Gamma", "Delta",
                         "Epsilon")
                         .subscribeOn(Schedulers.computation())
-                        .map(Ch6_9::intenseCalculation)
+                        .map(L6_9_Multiple_Observers_One_Thread::intenseCalculation)
                         .map(String::length)
                         .publish()
                         .autoConnect(2);

@@ -1,18 +1,20 @@
-package Ch6_ConcurrencyParallelization;
+package Ch6_ConcurrencyParallelization.RxJavaConcurrency;
 
 import io.reactivex.Observable;
 
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 
-public class Ch6_2 {
+public class L6_5_KeepAlive {
+    /*
+    If you are using Android, JavaFX, or other frameworks that manage their own non-daemon
+    threads, this is not a concern as the application will be kept alive for you
+    */
     public static void main(String[] args) {
-        Observable.just("Alpha", "Beta", "Gamma", "Delta",
-                "Epsilon")
-                .map(s -> intenseCalculation((s)))
+        Observable.interval(1, TimeUnit.SECONDS)
+                .map(l -> intenseCalculation((l)))
                 .subscribe(System.out::println);
-        Observable.range(1, 6)
-                .map(s -> intenseCalculation((s)))
-                .subscribe(System.out::println);
+        sleep(Long.MAX_VALUE); // keep the application alive indefinitely
     }
 
     public static <T> T intenseCalculation(T value) {

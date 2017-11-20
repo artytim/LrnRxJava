@@ -1,4 +1,4 @@
-package Ch6_ConcurrencyParallelization;
+package Ch6_ConcurrencyParallelization.observeOn;
 
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
@@ -7,7 +7,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 
-public class Ch6_14 {
+public class L6_14_Multiple_observeOn {
     public static void main(String[] args) {
 //Happens on IO Scheduler
         Observable.just("WHISKEY/27653/TANGO", "6555/BRAVO",

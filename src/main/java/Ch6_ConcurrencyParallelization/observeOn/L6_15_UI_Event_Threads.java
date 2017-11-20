@@ -1,4 +1,11 @@
-package Ch6_ConcurrencyParallelization;
+package Ch6_ConcurrencyParallelization.observeOn;
+
+/*
+ You can use observeOn() to move UI events to a computation or IO Scheduler to do the work, and
+  when the result is ready, move it back to the UI thread with another observeOn().
+  This second usage of observeOn() will put emissions on a UI thread using a custom Scheduler
+  that wraps around the UI thread.
+ */
 
 import io.reactivex.Observable;
 import io.reactivex.rxjavafx.observables.JavaFxObservable;
@@ -14,7 +21,20 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.Scanner;
 
-public final class Ch6_15 extends Application {
+public final class L6_15_UI_Event_Threads extends Application {
+    /*
+     A simple JavaFX application that displays a ListView<String> of the 50 U.S. states every time
+      a button is clicked on.
+
+     Create Observable<ActionEvent> off the button and then switch to an IO Scheduler with
+     observeOn() (subscribeOn() will have no effect against UI event sources).
+
+     Load the 50 states from a text web response while on the IO Scheduler.
+
+     Once the states are returned, use another observeOn() to put them back on JavaFxScheduler, and
+     safely populate them into ListView<String> on the JavaFX UI thread...
+     */
+
     @Override
     public void start(Stage stage) throws Exception {
         VBox root = new VBox();

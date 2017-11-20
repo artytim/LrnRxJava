@@ -1,16 +1,18 @@
-package Ch6_ConcurrencyParallelization;
+package Ch6_ConcurrencyParallelization.Parallelization;
 
 import io.reactivex.Observable;
 
+import java.time.LocalTime;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.TimeUnit;
 
-public class Ch6_5 {
+public class L6_16_NO_Parallelization {
+
     public static void main(String[] args) {
-        Observable.interval(1, TimeUnit.SECONDS)
-                .map(l -> intenseCalculation((l)))
-                .subscribe(System.out::println);
-        sleep(Long.MAX_VALUE);
+        Observable.range(1, 10)
+                .map(i -> intenseCalculation(i))
+                .subscribe(i -> System.out.println("Received " + i +
+                        " "
+                        + LocalTime.now()));
     }
 
     public static <T> T intenseCalculation(T value) {

@@ -1,11 +1,16 @@
-package Ch6_ConcurrencyParallelization;
+package Ch6_ConcurrencyParallelization.RxJavaConcurrency;
 
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Ch6_4 {
+public class L6_4_subscribeOn_zip {
+    /*
+    Being able to split and combine Observables happening on different threads is powerful and
+    eliminates the pain points of callbacks. Observables are agnostic to whatever thread
+    they work on, making concurrency easy to implement, configure, and evolve at any time
+     */
     public static void main(String[] args) {
         Observable<String> source1 =
                 Observable.just("Alpha", "Beta", "Gamma", "Delta",

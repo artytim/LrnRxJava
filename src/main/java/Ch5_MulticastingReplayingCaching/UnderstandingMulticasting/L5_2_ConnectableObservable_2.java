@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class L5_2_ConnectableObservable_2 {
     public static void main(String[] args) {
-
+        //Calling publish() on Observable returns a ConnectableObservable
         ConnectableObservable<Integer> threeInts =
                 Observable.range(1, 3).publish();
 
