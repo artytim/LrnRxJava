@@ -1,10 +1,14 @@
-package Ch7_SwitchingThrottlingWindowingBuffering;
+package Ch7_SwitchingThrottlingWindowingBuffering.Throttling;
 
 import io.reactivex.Observable;
 
 import java.util.concurrent.TimeUnit;
 
-public class Ch7_12 {
+public class L7_12_throttleLast {
+    /*
+     The throttleLast() operator (aliased as sample()) will only emit the last item
+     at a fixed time interval.
+     */
     public static void main(String[] args) {
         Observable<String> source1 = Observable.interval(100,
                 TimeUnit.MILLISECONDS)
@@ -22,6 +26,11 @@ public class Ch7_12 {
                 .map(i -> "SOURCE 3: " + i)
                 .take(2);
         Observable.concat(source1, source2, source3)
+                // Sample emissions by dipping into the stream on a timer
+                // and pulling out the latest one
+                //.throttleLast(1, TimeUnit.SECONDS)  //aliased as sample()
+                //.throttleLast(2, TimeUnit.SECONDS) //reduce the sample frequency
+                .throttleLast(500, TimeUnit.MILLISECONDS) // increase the sample frequency
                 .subscribe(System.out::println);
         sleep(6000);
     }

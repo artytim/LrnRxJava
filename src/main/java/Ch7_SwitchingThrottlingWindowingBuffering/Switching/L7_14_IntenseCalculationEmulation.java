@@ -1,11 +1,11 @@
-package Ch7_SwitchingThrottlingWindowingBuffering;
+package Ch7_SwitchingThrottlingWindowingBuffering.Switching;
 
 import io.reactivex.Observable;
 
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
-public class Ch7_14 {
+public class L7_14_IntenseCalculationEmulation {
     public static void main(String[] args) {
         Observable<String> items = Observable.just("Alpha", "Beta",
                 "Gamma", "Delta", "Epsilon",

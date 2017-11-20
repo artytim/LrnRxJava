@@ -1,10 +1,14 @@
-package Ch7_SwitchingThrottlingWindowingBuffering;
+package Ch7_SwitchingThrottlingWindowingBuffering.Throttling;
 
 import io.reactivex.Observable;
 
 import java.util.concurrent.TimeUnit;
 
-public class Ch7_13 {
+public class L7_12_throttleFirst {
+    /*
+     The throttleFirst() will only emit the first item at a fixed time interval.
+     */
+
     public static void main(String[] args) {
         Observable<String> source1 = Observable.interval(100,
                 TimeUnit.MILLISECONDS)
@@ -22,7 +26,9 @@ public class Ch7_13 {
                 .map(i -> "SOURCE 3: " + i)
                 .take(2);
         Observable.concat(source1, source2, source3)
-                .throttleWithTimeout(1, TimeUnit.SECONDS)
+                // Sample emissions by dipping into the stream on a timer
+                // and pulling out the latest one
+                .throttleFirst(1, TimeUnit.SECONDS)
                 .subscribe(System.out::println);
         sleep(6000);
     }

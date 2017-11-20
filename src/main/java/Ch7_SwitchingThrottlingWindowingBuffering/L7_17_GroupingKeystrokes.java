@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 import java.util.concurrent.TimeUnit;
 
-public final class Ch7_17 extends Application {
+public final class L7_17_GroupingKeystrokes extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         VBox root = new VBox();

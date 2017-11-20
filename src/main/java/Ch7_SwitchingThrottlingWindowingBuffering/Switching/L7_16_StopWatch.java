@@ -1,4 +1,4 @@
-package Ch7_SwitchingThrottlingWindowingBuffering;
+package Ch7_SwitchingThrottlingWindowingBuffering.Switching;
 
 import io.reactivex.Observable;
 import io.reactivex.rxjavafx.observables.JavaFxObservable;
@@ -12,20 +12,23 @@ import javafx.stage.Stage;
 
 import java.util.concurrent.TimeUnit;
 
-public final class Ch7_16 extends Application {
+public final class L7_16_StopWatch extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         VBox root = new VBox();
         Label counterLabel = new Label("");
+        // ToggleButton will emit a Boolean True/False value through an Observable
+        // called selectedStates
         ToggleButton startStopButton = new ToggleButton();
-// Multicast the ToggleButton's true/false selected state
+        // Multicast the ToggleButton's true/false selected state to prevent
+        // duplicate listeners on JavaFX
         Observable<Boolean> selectedStates =
                 JavaFxObservable.valuesOf(startStopButton.selectedProperty())
                         .publish()
                         .autoConnect(2);
-// Using switchMap() with ToggleButton's selected state willdrive
-// whether to kick off an Observable.interval(),
-// or dispose() it by switching to empty Observable
+        // Using switchMap() with ToggleButton's selected state will drive
+        // whether to kick off an Observable.interval(),
+        // or dispose() it by switching to empty Observable
         selectedStates.switchMap(selected -> {
             if (selected)
                 return Observable.interval(1,
@@ -35,10 +38,9 @@ public final class Ch7_16 extends Application {
         }).observeOn(JavaFxScheduler.platform()) // Observe on JavaFX UI thread
                 .map(Object::toString)
                 .subscribe(counterLabel::setText);
-// Change ToggleButton's text depending on its state
+        // Change ToggleButton's text depending on its state
         selectedStates.subscribe(selected ->
-                startStopButton.setText(selected ? "STOP" :
-                        "START")
+                startStopButton.setText(selected ? "STOP" : "START")
         );
         root.getChildren().addAll(counterLabel, startStopButton);
         stage.setScene(new Scene(root));
