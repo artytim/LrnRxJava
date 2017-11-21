@@ -1,4 +1,4 @@
-package Ch8_FlowablesBackpressure;
+package Ch8_FlowablesBackpressure.FlowableSubscriber;
 
 import io.reactivex.Flowable;
 import io.reactivex.schedulers.Schedulers;
@@ -7,15 +7,15 @@ import org.reactivestreams.Subscription;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import io.reactivex.Flowable;
-import io.reactivex.schedulers.Schedulers;
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
-
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Ch8_6 {
+public class L8_6_onSubscribe_custom {
+    /*
+     Manage custom backpressure with your own Subscriber implementation.
+
+     Note: The request() calls do not go all the way upstream. They only go to the preceding operator,
+     which decides how to relay that request upstream.
+     */
     public static void main(String[] args) {
         Flowable.range(1, 1000)
                 .doOnNext(s -> System.out.println("Source pushed "
@@ -23,6 +23,7 @@ public class Ch8_6 {
                 .observeOn(Schedulers.io())
                 .map(i -> intenseCalculation(i))
                 .subscribe(new Subscriber<Integer>() {
+                    //request 40 emissions initially and then 20 emissions at a time after that
                     Subscription subscription;
                     AtomicInteger count = new AtomicInteger(0);
 

@@ -1,11 +1,15 @@
-package Ch8_FlowablesBackpressure;
+package Ch8_FlowablesBackpressure.CreatingFlowable;
 
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 
 import static Ch5_MulticastingReplayingCaching.Subjects.L5_21_Subjects_2.sleep;
 
-public class Ch8_8 {
+public class L8_8_Observable_create {
+    /*
+    create your own Observable from scratch, which describes how to emit items when
+    it is subscribed to...
+     */
     public static void main(String[] args) {
         Observable<Integer> source = Observable.create(emitter -> {
             for (int i = 0; i <= 1000; i++) {

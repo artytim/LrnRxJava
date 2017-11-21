@@ -1,17 +1,19 @@
-package Ch8_FlowablesBackpressure;
+package Ch8_FlowablesBackpressure.onBackpressureXXX;
 
-import io.reactivex.BackpressureOverflowStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.schedulers.Schedulers;
 
 import java.util.concurrent.TimeUnit;
 
-public class Ch8_13 {
+public class L8_12_onBackPressureBuffer {
+    /*
+     If you are provided a Flowable that has no backpressure implementation (including ones derived
+      from Observable), you can apply BackpressureStrategy using onBackpressureXXX() operators.
+      These also provide a few additional configuration options.
+     */
     public static void main(String[] args) {
         Flowable.interval(1, TimeUnit.MILLISECONDS)
-                .onBackpressureBuffer(10,
-                        () -> System.out.println("overflow!"),
-                        BackpressureOverflowStrategy.DROP_LATEST)
+                .onBackpressureBuffer()
                 .observeOn(Schedulers.io())
                 .subscribe(i -> {
                     sleep(5);

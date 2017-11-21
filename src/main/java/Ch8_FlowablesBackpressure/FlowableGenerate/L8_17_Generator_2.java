@@ -1,11 +1,11 @@
-package Ch8_FlowablesBackpressure;
+package Ch8_FlowablesBackpressure.FlowableGenerate;
 
 import io.reactivex.Flowable;
 import io.reactivex.schedulers.Schedulers;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Ch8_17 {
+public class L8_17_Generator_2 {
     public static void main(String[] args) {
         rangeReverse(100, -100)
                 .subscribeOn(Schedulers.computation())

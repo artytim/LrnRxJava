@@ -1,4 +1,4 @@
-package Ch8_FlowablesBackpressure;
+package Ch8_FlowablesBackpressure.FlowableSubscriber;
 
 import io.reactivex.Flowable;
 import io.reactivex.schedulers.Schedulers;
@@ -7,25 +7,21 @@ import org.reactivestreams.Subscription;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
-public class Ch8_7 {
+public class L8_5_onSubscribe_easy {
     public static void main(String[] args) {
         Flowable.range(1, 1000)
-                .doOnNext(s -> System.out.println("Source pushed "
-                        + s))
+                .doOnNext(s -> System.out.println("Source pushed " + s))
                 .observeOn(Schedulers.io())
                 .map(i -> intenseCalculation(i))
                 .subscribe(new Subscriber<Integer>() {
-                    Subscription subscription;
-                    AtomicInteger count = new AtomicInteger(0);
-
                     @Override
                     public void onSubscribe(Subscription
                                                     subscription) {
-                        this.subscription = subscription;
-                        System.out.println("Requesting 40 items!");
-                        subscription.request(40);
+                        //tells the upstream "give me everything now"
+                        //The operators preceding Subscriber will request emissions at their own
+                        //backpressured pace, no backpressure will exist between
+                        //the last operator and the Subscriber
+                        subscription.request(Long.MAX_VALUE);
                     }
 
                     @Override
@@ -33,10 +29,6 @@ public class Ch8_7 {
                         sleep(50);
                         System.out.println("Subscriber received " +
                                 s);
-                        if (count.incrementAndGet() % 20 == 0 &&
-                                count.get() >= 40)
-                            System.out.println("Requesting 20 more !");
-                        subscription.request(20);
                     }
 
                     @Override
@@ -61,7 +53,6 @@ public class Ch8_7 {
     public static void sleep(long millis) {
         try {
             Thread.sleep(millis);
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

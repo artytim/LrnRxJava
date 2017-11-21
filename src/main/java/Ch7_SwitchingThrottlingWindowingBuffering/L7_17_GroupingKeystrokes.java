@@ -13,6 +13,10 @@ import javafx.stage.Stage;
 import java.util.concurrent.TimeUnit;
 
 public final class L7_17_GroupingKeystrokes extends Application {
+    /*
+     Group keystrokes that happen in rapid succession to form strings without any delay
+
+     */
     @Override
     public void start(Stage stage) throws Exception {
         VBox root = new VBox();
@@ -20,20 +24,21 @@ public final class L7_17_GroupingKeystrokes extends Application {
         Label typedTextLabel = new Label("");
         root.getChildren().addAll(typedTextLabel);
         Scene scene = new Scene(root);
-// Multicast typed keys
+
+        // Multicast typed keys
         Observable<String> typedLetters =
                 JavaFxObservable.eventsOf(scene,
                         KeyEvent.KEY_TYPED)
                         .map(KeyEvent::getCharacter)
                         .share();
-// Signal 300 milliseconds of inactivity
+        // Signal 300 milliseconds of inactivity
         Observable<String> restSignal =
                 typedLetters
                         .throttleWithTimeout(500,
                                 TimeUnit.MILLISECONDS)
                         .startWith(""); //trigger initial
-// switchMap() each period of inactivity to
-// an infinite scan() concatenating typed letters
+        // switchMap() each period of inactivity to
+        // an infinite scan() concatenating typed letters
         restSignal.switchMap(s ->
                 typedLetters.scan("", (rolling, next) -> rolling +
                         next)

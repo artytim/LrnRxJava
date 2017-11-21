@@ -1,17 +1,21 @@
-package Ch8_FlowablesBackpressure;
+package Ch8_FlowablesBackpressure.Introduction;
 
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 
-public class Ch8_2 {
+public class L8_2_ProducerConsumerProblem {
+    /*
+     The emissions are being pushed much faster than the Observer can process them, and because
+      backlogged emissions get queued by observeOn() in an unbounded manner, this could lead to
+      many problems, including OutOfMemoryError exceptions
+     */
     public static void main(String[] args) {
         Observable.range(1, 999_999_999)
                 .map(MyItem::new)
-                .observeOn(Schedulers.io())
+                .observeOn(Schedulers.io()) // The source is no longer in charge of pushing...
                 .subscribe(myItem -> {
                     sleep(50);
-                    System.out.println("Received MyItem " +
-                            myItem.id);
+                    System.out.println("Received MyItem " + myItem.id);
                 });
         sleep(Long.MAX_VALUE);
     }

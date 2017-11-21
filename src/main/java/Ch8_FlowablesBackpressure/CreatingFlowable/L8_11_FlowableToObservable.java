@@ -1,10 +1,10 @@
-package Ch8_FlowablesBackpressure;
+package Ch8_FlowablesBackpressure.CreatingFlowable;
 
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 
-public class Ch8_11 {
+public class L8_11_FlowableToObservable {
     public static void main(String[] args) {
         Flowable<Integer> integers =
                 Flowable.range(1, 1000)

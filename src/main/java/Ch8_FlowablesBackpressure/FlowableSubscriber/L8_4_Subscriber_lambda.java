@@ -1,17 +1,18 @@
-package Ch8_FlowablesBackpressure;
+package Ch8_FlowablesBackpressure.FlowableSubscriber;
 
 import io.reactivex.Flowable;
 import io.reactivex.schedulers.Schedulers;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Ch8_4 {
+public class L8_4_Subscriber_lambda {
     public static void main(String[] args) {
         Flowable.range(1, 1000)
                 .doOnNext(s -> System.out.println("Source pushed "
                         + s))
                 .observeOn(Schedulers.io())
                 .map(i -> intenseCalculation(i))
+                // returns a Subscription
                 .subscribe(s -> System.out.println("Subscriber received " + s),
                         Throwable::printStackTrace,
                         () -> System.out.println("Done!")

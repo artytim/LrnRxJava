@@ -1,14 +1,17 @@
-package Ch8_FlowablesBackpressure;
+package Ch8_FlowablesBackpressure.onBackpressureXXX;
 
+import io.reactivex.BackpressureOverflowStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.schedulers.Schedulers;
 
 import java.util.concurrent.TimeUnit;
 
-public class Ch8_12 {
+public class L8_13_BackpressureOverflowStrategy {
     public static void main(String[] args) {
         Flowable.interval(1, TimeUnit.MILLISECONDS)
-                .onBackpressureBuffer()
+                .onBackpressureBuffer(10,
+                        () -> System.out.println("overflow!"),
+                        BackpressureOverflowStrategy.DROP_LATEST)
                 .observeOn(Schedulers.io())
                 .subscribe(i -> {
                     sleep(5);
