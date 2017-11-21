@@ -1,9 +1,9 @@
-package Ch9_TransformersCustomOperators.Transformers;
+package Ch9_TransformersCustomOperators.Transformers.Transformers;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
 
-public class Ch9_2 {
+public class L9_2_ObservableTransformer_2 {
     public static void main(String[] args) {
         Observable.just("Alpha", "Beta", "Gamma", "Delta",
                 "Epsilon")

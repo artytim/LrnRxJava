@@ -1,4 +1,4 @@
-package Ch9_TransformersCustomOperators.Transformers;
+package Ch9_TransformersCustomOperators.Transformers.Using_toForFluentConversion;
 
 import io.reactivex.Observable;
 import io.reactivex.rxjavafx.observers.JavaFxObserver;
@@ -8,24 +8,21 @@ import javafx.beans.binding.Binding;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-
 import javafx.stage.Stage;
 
 import java.util.concurrent.TimeUnit;
 
-public final class Ch9_5 extends Application {
+public final class Ch9_6 extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         VBox root = new VBox();
         Label label = new Label("");
-// Observable with second timer
-        Observable<String> seconds =
-                Observable.interval(1, TimeUnit.SECONDS)
-                        .map(i -> i.toString())
-                        .observeOn(JavaFxScheduler.platform());
 // Turn Observable into Binding
         Binding<String> binding =
-                JavaFxObserver.toBinding(seconds);
+                Observable.interval(1, TimeUnit.SECONDS)
+                        .map(i -> i.toString())
+                        .observeOn(JavaFxScheduler.platform())
+                        .to(JavaFxObserver::toBinding);
 //Bind Label to Binding
         label.textProperty().bind(binding);
         root.setMinSize(200, 100);

@@ -1,11 +1,11 @@
-package Ch9_TransformersCustomOperators.Transformers;
+package Ch9_TransformersCustomOperators.Transformers.Transformers;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Ch9_4 {
+public class L9_4_AvoidingSharedState {
     public static void main(String[] args) {
         Observable<IndexedValue<String>> indexedStrings =
                 Observable.just("Alpha", "Beta", "Gamma", "Delta",

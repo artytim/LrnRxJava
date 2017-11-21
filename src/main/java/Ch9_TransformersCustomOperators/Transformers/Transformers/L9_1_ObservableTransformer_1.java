@@ -1,26 +1,26 @@
-package Ch9_TransformersCustomOperators.Transformers;
+package Ch9_TransformersCustomOperators.Transformers.Transformers;
 
 import com.google.common.collect.ImmutableList;
-import io.reactivex.Flowable;
-import io.reactivex.FlowableTransformer;
+import io.reactivex.Observable;
+import io.reactivex.ObservableTransformer;
 
-public class Ch9_3 {
+public class L9_1_ObservableTransformer_1 {
     public static void main(String[] args) {
-        Flowable.just("Alpha", "Beta", "Gamma", "Delta",
+        Observable.just("Alpha", "Beta", "Gamma", "Delta",
                 "Epsilon")
                 .compose(toImmutableList())
                 .subscribe(System.out::println);
-        Flowable.range(1, 10)
+        Observable.range(1, 10)
                 .compose(toImmutableList())
                 .subscribe(System.out::println);
     }
 
-    public static <T> FlowableTransformer<T, ImmutableList<T>>
+    public static <T> ObservableTransformer<T, ImmutableList<T>>
     toImmutableList() {
         return upstream ->
                 upstream.collect(ImmutableList::<T>builder,
                         ImmutableList.Builder::add)
                         .map(ImmutableList.Builder::build)
-                        .toFlowable(); // must turn Single into Flowable
+                        .toObservable(); // must turn Single into Observable
     }
 }
