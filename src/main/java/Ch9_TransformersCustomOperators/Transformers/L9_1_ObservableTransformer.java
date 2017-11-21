@@ -1,10 +1,10 @@
-package Ch9_TransformersCustomOperators;
+package Ch9_TransformersCustomOperators.Transformers;
 
 import com.google.common.collect.ImmutableList;
 import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
 
-public class Ch9_1 {
+public class L9_1_ObservableTransformer {
     public static void main(String[] args) {
         Observable.just("Alpha", "Beta", "Gamma", "Delta",
                 "Epsilon")

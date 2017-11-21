@@ -1,4 +1,4 @@
-package Ch9_TransformersCustomOperators;
+package Ch9_TransformersCustomOperators.Transformers;
 
 import io.reactivex.Flowable;
 import io.reactivex.FlowableOperator;

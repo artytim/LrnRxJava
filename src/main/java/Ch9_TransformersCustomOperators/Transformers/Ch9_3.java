@@ -1,4 +1,4 @@
-package Ch9_TransformersCustomOperators;
+package Ch9_TransformersCustomOperators.Transformers;
 
 import com.google.common.collect.ImmutableList;
 import io.reactivex.Flowable;

@@ -1,4 +1,4 @@
-package Ch9_TransformersCustomOperators;
+package Ch9_TransformersCustomOperators.Transformers;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
